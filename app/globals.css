@@ -3,6 +3,40 @@
 
 @custom-variant dark (&:is(.dark *));
 
+@theme {
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Bandeau de compétences qui défile à l'infini */
+  --animate-marquee: marquee var(--marquee-duration, 40s) linear infinite;
+  @keyframes marquee {
+    to {
+      transform: translateX(calc(-50% - 0.5rem));
+    }
+  }
+}
+
 html {
-  scroll-padding-top: 6rem; /* same as navbar height */
+  scroll-behavior: smooth;
+  scroll-padding-top: 6rem; /* hauteur de la barre de navigation */
+  color-scheme: dark;
+}
+
+body {
+  background: #000;
+}
+
+::selection {
+  background: rgb(168 85 247 / 0.4);
+  color: #fff;
+}
+
+/* Respecte « réduire les animations » pour les animations CSS */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .animate-marquee {
+    animation: none;
+  }
 }
